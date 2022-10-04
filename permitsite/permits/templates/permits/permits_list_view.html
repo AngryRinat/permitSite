@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for permit in permitlist %}
+
+    {{ permit.car_number }}
+<br>
+    {{ permit.customer }}
+<br>
+    {{ permit.created }}
+
+{% endfor %}
+
+</body>
+</html>
