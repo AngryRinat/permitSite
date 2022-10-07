@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+{% if permitlist %}
 {% for permit in permitlist %}
 
     {{ permit.car_number }}
@@ -12,8 +13,12 @@
     {{ permit.customer }}
 <br>
     {{ permit.created }}
+<hr>
 
 {% endfor %}
+{% else %}
+    Нет пропусков!
+{% endif %}
 
 </body>
 </html>

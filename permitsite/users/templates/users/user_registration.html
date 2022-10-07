@@ -5,11 +5,11 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <div style="width:220px; margin:0 auto">
-    <h1>Enter car number</h1>
+   <div style="width:220px; margin:0 auto">
+    <h1>Регистрация</h1>
     <form method="post" >{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Order">
+    <input type="submit" value="Зарегестрировать">
     </form>
     </div>
 </body>
