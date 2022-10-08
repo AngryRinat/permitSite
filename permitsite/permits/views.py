@@ -58,7 +58,20 @@ class PermitControlView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['permitlist'] = Permit.objects.filter(is_active=True)
+        search_by = self.request.GET.get('search_by')
+        query = self.request.GET.get('query')
+        search_message = 'All phones'
+        if search_by in ['phone', 'name'] and search_by:
+            if search_by == 'name':
+               permitlist = Permit.objects.filter(customer__username=query)
+               search_message = f'Searching for "name" by "{query}"'
+            else:
+               permitlist = Permit.objects.filter(car_number=query)
+               search_message = f'Searching for "phones" by "{query}"'
+        else:
+             permitlist = Permit.objects.all()
+        context["permitlist"] = permitlist
+        context["search_message"] = search_message
         return context
 
 
@@ -70,22 +83,3 @@ def permit_deactivate(request, id):
 
 
 
-# class HomePageView(TemplateView):
-#     template_name="phonebook/home.html"
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         search_by = self.request.GET.get('search_by')
-#         query = self.request.GET.get('query')
-#         search_message = 'All phones'
-#         if search_by in ['phone', 'name'] and search_by:
-#             if search_by == 'name':
-#                 persons = Persone.objects.filter(name=query)
-#                 search_message = f'Searching for "name" by "{query}"'
-#             else:
-#                 persons = Persone.objects.filter(phones__phone=query)
-#                 search_message = f'Searching for "phones" by "{query}"'
-#         else:
-#             persons = Persone.objects.all()
-#         context["persons"] = persons
-#         context["search_message"] = search_message
-#         return context
