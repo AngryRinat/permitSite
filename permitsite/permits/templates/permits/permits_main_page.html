@@ -19,9 +19,14 @@
             <li><a href="{% url 'permits:create' %}" class="goods-item__btn">Заказать пропуск</a></li>
             <li><a href="{% url 'permits:list' %}" class="goods-item__btn">Показать действующие пропуска</a></li>
             <li><a href="{% url 'permits:archive' %}" class="goods-item__btn">Показать архив пропусков</a></li>
+            {% if user.is_staff %}
+            <li><a href="{% url 'permits:control' %}" class="goods-item__btn">Контроль пропусков</a></li>
+            {% endif %}
             <li><a href="{% url 'users:logout' %}" class="goods-item__btn">Выйти</a></li>
             {% else %}
-            <li><a href="{% url 'users:login' %}" class="goods-item__btn">Авторизоваться</a></li>
+            <li><a href="{% url 'users:login' %}" class="goods-item__btn">Войти</a></li>
+            <li><a href="{% url 'users:register' %}" class="goods-item__btn">Зарегистрироваться</a></li>
+
             {% endif %}
         </ul>
         </div>

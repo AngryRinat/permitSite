@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 from rest_framework.viewsets import ModelViewSet
 
 from permits.forms import PermitCreateForm
@@ -52,5 +52,40 @@ def permits_main_page(request):
     }
     return render(request, 'permits/permits_main_page.html', context)
 
+class PermitControlView(ListView):
+    model = Permit
+    template_name = 'permits/permits_list_control.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['permitlist'] = Permit.objects.filter(is_active=True)
+        return context
 
 
+def permit_deactivate(request, id):
+    permit = Permit.objects.get(id=id)
+    permit.is_active = False
+    permit.save()
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+
+# class HomePageView(TemplateView):
+#     template_name="phonebook/home.html"
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         search_by = self.request.GET.get('search_by')
+#         query = self.request.GET.get('query')
+#         search_message = 'All phones'
+#         if search_by in ['phone', 'name'] and search_by:
+#             if search_by == 'name':
+#                 persons = Persone.objects.filter(name=query)
+#                 search_message = f'Searching for "name" by "{query}"'
+#             else:
+#                 persons = Persone.objects.filter(phones__phone=query)
+#                 search_message = f'Searching for "phones" by "{query}"'
+#         else:
+#             persons = Persone.objects.all()
+#         context["persons"] = persons
+#         context["search_message"] = search_message
+#         return context

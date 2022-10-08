@@ -6,16 +6,21 @@
 </head>
 <body>
 {% if permitlist %}
+<ul>
 {% for permit in permitlist %}
+    <li>
+    Номер машины - {{ permit.car_number }}
+<br>
+    Заказчик - {{ permit.customer }}
+<br>
+    Дата оформления - {{ permit.created }}
+<br>
 
-    {{ permit.car_number }}
-<br>
-    {{ permit.customer }}
-<br>
-    {{ permit.created }}
+    <a href="{% url 'permits:permit_deactivate' permit.id %}">Деактивировать</a>
 <hr>
-
+    </li>
 {% endfor %}
+</ul>
 {% else %}
     Нет пропусков!
 {% endif %}
