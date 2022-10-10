@@ -26,8 +26,9 @@ from permits.views import PermitViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('permits.urls', namespace='permits')),
+    path('main', include('permits.urls', namespace='permits')),
     path('users/', include('users.urls', namespace='users')),
+    path('', include('api.urls')),
 ]
 
 

@@ -61,15 +61,16 @@ class PermitControlView(ListView):
         search_by = self.request.GET.get('search_by')
         query = self.request.GET.get('query')
         search_message = 'All phones'
+
         if search_by in ['phone', 'name'] and search_by:
             if search_by == 'name':
-               permitlist = Permit.objects.filter(customer__username=query)
+               permitlist = Permit.objects.filter(customer__username__icontains=query, is_active=True)
                search_message = f'Searching for "name" by "{query}"'
             else:
-               permitlist = Permit.objects.filter(car_number=query)
+               permitlist = Permit.objects.filter(car_number__icontains=query, is_active=True)
                search_message = f'Searching for "phones" by "{query}"'
         else:
-             permitlist = Permit.objects.all()
+             permitlist = Permit.objects.filter(is_active=True)
         context["permitlist"] = permitlist
         context["search_message"] = search_message
         return context
