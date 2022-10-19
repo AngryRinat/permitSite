@@ -1,9 +1,9 @@
-from users.models import User
+from permits.models import Permit
 from rest_framework import serializers
 
 
 
-class UserSerializer(serializers.ModelSerializer):
+class PermitSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'username']
+        model = Permit
+        fields = ['car_number', 'is_active']

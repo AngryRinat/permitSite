@@ -18,8 +18,7 @@ class UserCreate(CreateView):
     success_url = reverse_lazy('permits:index')
     title = 'Регистрация'
 
-    # def form_valid(self, form):
-    #     user = form.save()
+
 
 
 class UserLogin(LoginView):

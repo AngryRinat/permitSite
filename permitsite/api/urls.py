@@ -1,11 +1,12 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
 urlpatterns = [
-    path('users/', views.UserAPIList.as_view()),
-    path('users/<int:pk>/', views.UserAPIList.as_view()),
-    path('usersdetail/<int:pk>', views.UserAPIDetailView.as_view()),
+    path('permits/', views.PermitAPIList.as_view()),
+    path('drf-auth/', include('rest_framework.urls')),
+    path('users/<int:pk>/', views.PermitAPIList.as_view()),
+    path('permit-update/<int:pk>', views.PermitUpdateAPIView.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

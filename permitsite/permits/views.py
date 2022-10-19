@@ -7,6 +7,7 @@ from rest_framework.viewsets import ModelViewSet
 from permits.forms import PermitCreateForm
 from permits.models import Permit
 from permits.serializers import PermitSerializer
+from users.models import UserAccessMixin
 
 
 
@@ -14,7 +15,11 @@ class PermitViewSet(ModelViewSet):
     queryset = Permit.objects.all()
     serializer_class = PermitSerializer
 
-class PermitCreateView(CreateView):
+class PermitCreateView(UserAccessMixin, CreateView):
+
+    raise_exception = False
+    permission_required = 'permits.add_permit'
+
     form_class = PermitCreateForm
     template_name = 'permits/permits_create.html'
     success_url = reverse_lazy('permits:index')

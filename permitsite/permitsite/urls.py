@@ -20,15 +20,13 @@ from rest_framework.routers import SimpleRouter
 
 from permits.views import PermitViewSet
 
-# router = SimpleRouter()
 
-# router.register(r'permit', PermitViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('main', include('permits.urls', namespace='permits')),
+    path('permits/', include('permits.urls', namespace='permits')),
     path('users/', include('users.urls', namespace='users')),
-    path('', include('api.urls')),
+    path('api/v1/', include('api.urls')),
 ]
 
 
