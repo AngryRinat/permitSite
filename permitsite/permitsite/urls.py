@@ -20,7 +20,9 @@ from rest_framework.routers import SimpleRouter
 
 from permits.views import PermitViewSet
 
+router = SimpleRouter()
 
+router.register(r'permit', PermitViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +32,4 @@ urlpatterns = [
 ]
 
 
-# urlpatterns += router.urls
+urlpatterns += router.urls

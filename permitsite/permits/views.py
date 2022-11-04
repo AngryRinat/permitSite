@@ -6,7 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from permits.forms import PermitCreateForm
 from permits.models import Permit
-from permits.serializers import PermitSerializer
+from api.serializers import PermitSerializer
 from users.models import UserAccessMixin
 
 

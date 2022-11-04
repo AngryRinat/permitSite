@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'api.apps.ApiConfig',
+    'django_filters',
 
     'permits',
     'users',
@@ -76,14 +77,21 @@ WSGI_APPLICATION = 'permitsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'permitdb',
+#         'USER': 'permituser',
+#         'PASSWORD': 'dalek',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432'
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'permitdb',
-        'USER': 'permituser',
-        'PASSWORD': 'dalek',
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -126,4 +134,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+
+
+'DEFAULT_RENDERER_CLASSES': (
+    'rest_framework.renderers.JSONRenderer',
+),
+'DEFAULT_PARSER_CLASSES': (
+    'rest_framework.parsers.JSONParser',
+)
+}
 
