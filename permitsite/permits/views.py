@@ -31,6 +31,7 @@ class PermitCreateView(UserAccessMixin, CreateView):
 
 
 
+
 def permits_user_list(request):
     permitlist = Permit.objects.filter(customer = request.user, is_active = True)
     context = {
